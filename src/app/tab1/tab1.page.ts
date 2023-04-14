@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
+import { ReqresService } from '../services/reqres.service'
 
 @Component({
   selector: 'app-tab1',
@@ -10,5 +11,13 @@ import { ExploreContainerComponent } from '../explore-container/explore-containe
   imports: [IonicModule, ExploreContainerComponent],
 })
 export class Tab1Page {
-  constructor() {}
+  constructor(private servico: ReqresService) {
+    this.buscarUsuarios()
+  }
+
+  buscarUsuarios() {
+    this.servico.getAll().subscribe(dados => {
+      console.log(dados);
+    })
+  }
 }

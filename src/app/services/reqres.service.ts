@@ -15,9 +15,7 @@ export class ReqresService {
 
 
   getAll(){
-    return this.http.get(this.url).subscribe(data => {
-      data = data;
-    });
+    return this.http.get(this.url);
   }
 
   getOne(id:number){
