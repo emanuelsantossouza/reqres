@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      All User of Reqres
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center ion-align-center" [fullscreen]="true">
+
+  <ion-card *ngFor="let lista of listaDadosUsuario">
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-button color="tertiary" [routerLink]="['/alterar-usuario', lista.id]" slot="start">
+          <ion-icon name="create-outline">
+          </ion-icon>
+        </ion-button>
+        <ion-button color="tertiary" (click)='AlertDeleteUser(lista.id!)' slot="end">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-card-title>{{lista.first_name}} {{lista.last_name}}</ion-card-title>
+      <ion-item lines="none">
+        <ion-thumbnail>
+          <img alt="a photo about {{lista.first_name}}" src="{{lista.avatar}}" />
+        </ion-thumbnail>
+      </ion-item>
+
+    </ion-card-content>
+    <ion-card-header>
+      <ion-card-subtitle><a href=""></a>{{lista.email}}</ion-card-subtitle>
+      <ion-item lines="none">
+        <ion-label>Id:</ion-label>
+        <ion-badge color="tertiary">{{lista.id}}</ion-badge>
+      </ion-item>
+    </ion-card-header>
+
+  </ion-card>
+
+</ion-content>

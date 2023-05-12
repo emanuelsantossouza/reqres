@@ -1,36 +1,42 @@
+import { User } from './../models/User';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../models/User';
+import { Observable } from 'rxjs';
+import { ResponseApi } from '../models/ResponseApi';
+import { ResponseCreate } from '../models/ResponseCreate';
+import { ResponseUpdate } from '../models/ResponseUpdate';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReqresService {
 
-  url: string = 'https://reqres.in/api/users'
+  url: string = 'https://reqres.in/api'
 
-  constructor(private http: HttpClient) { 
-    this.getAll();
+  constructor(private http: HttpClient) { }
+
+  getAll():Observable<ResponseApi> {
+    const urlApi = `${this.url}/users/`;
+    return this.http.get<ResponseApi>(urlApi);
   }
 
-
-  getAll(){
-    return this.http.get(this.url);
+  getOne(id: number): Observable<ResponseApi>{
+    const urlApi = `${this.url}/users/${id}`;
+    return this.http.get<ResponseApi>(urlApi);
   }
 
-  getOne(id:number){
-    return this.http.get(`${this.url}/${id}`);
+  create(user:ResponseCreate): Observable<ResponseCreate>{
+    const urlApi = `${this.url}/users`;
+    return this.http.post<ResponseCreate>(urlApi, user);
   }
 
-  create(user: User){
-    return this.http.post(this.url, user);
+  update(user: User, id: number): Observable<ResponseUpdate>{
+    const urlApi = `${this.url}/users/${id}`
+    return this.http.put<ResponseUpdate>(urlApi, user);
   }
 
-  update(user: User){
-    return this.http.put(`${this.url}/ ${user.id}`, user);
-  }
-
-  delete(id: number){
+  delete(id: number) {
+    const urlApi = `${this.url}/users/${id}`
     return this.http.delete(`${this.url}/${id}`);
   }
 }
